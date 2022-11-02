@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?> <!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hp.mapper.AssListMapper">
+    <!--查询-->
+    <select id="findAll" resultType="assetsInfo" parameterType="assetsInfo">
+        select a.aid,a.aname,a.acount,a.aunit,a.amoney,a.caiTime,a.dengTime,a.aState,a.aUser,a.tid,t.tid,t.tname from
+        assetsinfo a,assetstype t
+        where
+        a.tid=t.tid
+    </select>
+    <!--添加-->
+    <insert id="addAll" parameterType="assetsInfo">
+        insert into
+         assetsinfo
+         (aname,acount,aunit,amoney,caitime,dengtime,astate,auser,tid)
+        values
+        (#{aname},#{acount},#{aunit},#{amoney},#{caitime},#{dengtime},#{astate},#{auser},#{tid})
+    </insert>
+    <!--查询tname-->
+    <select id="asTnamefind" parameterType="assetsType" resultType="assetsType">
+        select * from assetstype
+    </select>
+    <!--根据id查询-->
+    <select id="findById" resultType="assetsInfo" parameterType="java.lang.Integer">
+        select * from assetsinfo where aid=#{aid}
+    </select>
+    <!--修改-->
+    <update id="update" parameterType="assetsInfo">
+        update
+          assetsinfo
+        set
+          aname=#{aname},acount=#{acount},aunit=#{aunit},amoney=#{amoney},caitime=#{caitime},dengtime=#{dengtime},astate=#{astate},auser=#{auser},tid=#{tid}
+        where
+        aid=#{aid}
+    </update>
+    <!--删除-->
+    <delete id="delete" parameterType="int">
+        delete from assetsinfo where aid=#{aid}
+    </delete>
+</mapper>
